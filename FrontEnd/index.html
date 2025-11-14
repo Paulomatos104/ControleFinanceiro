@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle Financeiro</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>Controle Financeiro</h1>
+
+        <div class="saldo-info">
+            <h2 id="saldo">Saldo: R$ 0,00</h2>
+            <button id="btn-editar-salario" class="btn-salario">Editar Salário</button>
+        </div>
+
+        <h3>Adicionar Despesa</h3>
+        <form id="formTransacao">
+            <input type="text" id="descricao" placeholder="Descrição" required />
+            <input type="number" id="valor" placeholder="Valor" required />
+
+            <select id="formaPagamento">
+                <option value="pix">Pix</option>
+                <option value="credito">Cartão de Crédito</option>
+                <option value="debito">Cartão de Débito</option>
+            </select>
+
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <h3>Extrato</h3>
+        <ul id="listaTransacoes"></ul>
+    </div>
+
+    <!-- POP-UP EDITAR SALÁRIO -->
+    <div id="salarioModal" class="modal">
+        <div class="modal-content">
+            <h3>Editar Salário</h3>
+            <input type="number" id="novoSalario" placeholder="Digite o novo salário" />
+            <div class="modal-buttons">
+                <button id="salvarSalario">Salvar</button>
+                <button id="cancelarSalario">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
