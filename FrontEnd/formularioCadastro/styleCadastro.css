@@ -1,88 +1,75 @@
+/* ----------------------------- */
+/* RESET BÁSICO                  */
+/* ----------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* ----------------------------- */
+/* VARIÁVEIS                     */
+/* ----------------------------- */
+:root {
+    --bg: linear-gradient(135deg, #6a9cff 0%, #7be3c7 100%);
+    --bg-hover: linear-gradient(135deg, #5a8ef0 0%, #63d9b2 100%);
+    --text: #fff;
+    --shadow: 0 8px 20px rgba(43, 79, 136, 0.25);
+    --radius: 12px;
+    --padding-y: 12px;
+    --padding-x: 20px;
+    --transition: 260ms cubic-bezier(.22, .9, .36, 1);
+}
+
+/* ----------------------------- */
+/* BODY                          */
+/* ----------------------------- */
 body {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
+    background: #f4f7fb;
+    padding: 32px;
 }
-.formularioCadastro {
+
+/* ----------------------------- */
+/* CONTAINER DO FORMULÁRIO       */
+/* ----------------------------- */
+.container {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    
+    padding: 25px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
-.formularioCadastro h1 {
+
+.container h1 {
     text-align: center;
     margin-bottom: 20px;
-    font-family: Arial, sans-serif;
     color: #333333;
-}
-.buttonconfir {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-:root{
---bg: linear-gradient(135deg,#6a9cff 0%, #7be3c7 100%);
---bg-hover: linear-gradient(135deg,#5a8ef0 0%, #63d9b2 100%);
---text: #fff;
---shadow: 0 8px 20px rgba(43,79,136,0.25);
---radius: 12px;
---padding-y: 12px;
---padding-x: 20px;
---transition: 260ms cubic-bezier(.22,.9,.36,1);
+    font-size: 24px;
 }
 
-
-/* Reset básico */
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
-body{display:flex;align-items:center;justify-content:center;background:#f4f7fb;padding:32px}
-
-
-/* Container apenas para demo */
-.demo{display:flex;gap:18px;align-items:center}
-
-
-/* Estilo do botão */
-.btn{
-display:inline-flex;align-items:center;gap:10px;justify-content:center;
-background:var(--bg);
-color:var(--text);
-padding:var(--padding-y) var(--padding-x);
-border-radius:var(--radius);
-border:0;cursor:pointer;user-select:none;
-box-shadow:var(--shadow);
-font-weight:600;font-size:16px;
-letter-spacing:0.2px;
-transition:transform var(--transition),box-shadow var(--transition),background var(--transition),opacity var(--transition);
--webkit-tap-highlight-color:transparent;
+/* ----------------------------- */
+/* MENSAGEM DE ERRO               */
+/* ----------------------------- */
+#msg {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    color: red;
 }
 
-.btn:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(43,79,136,0.18);background:var(--bg-hover)}
-.btn:active{transform:translateY(-1px);opacity:0.95}
-
-/* Acessibilidade */
-.btn:focus{outline:3px solid rgba(123,227,199,0.28);outline-offset:4px}
-.btn:focus:not(:focus-visible){outline:none}
-
-/* Pequeno ícone dentro do botão (SVG) */
-.btn svg{width:18px;height:18px;flex-shrink:0;opacity:0.95}
-
-/* Responsividade */
-@media (max-width:420px){
-.btn{font-size:15px;padding:10px 14px}
-}
+/* ----------------------------- */
+/* INPUTS ESTILOSOS              */
+/* ----------------------------- */
 .input-estiloso {
     width: 100%;
-    max-width: 260px;
     padding: 12px 16px;
     font-size: 15px;
 
@@ -91,15 +78,75 @@ transition:transform var(--transition),box-shadow var(--transition),background v
     border-radius: 10px;
 
     transition: 220ms ease;
-  }
+    margin-bottom: 14px;
+}
 
-  .input-estiloso:hover {
+.input-estiloso:hover {
     border-color: #a8b3c1;
-  }
+}
 
-  .input-estiloso:focus {
+.input-estiloso:focus {
     border-color: #4e8cff;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(78, 140, 255, 0.25);
     outline: none;
-  }
+}
+
+/* ----------------------------- */
+/* BOTÃO ESTILOSO                */
+/* ----------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: var(--bg);
+    color: var(--text);
+    padding: var(--padding-y) var(--padding-x);
+
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(43, 79, 136, 0.18);
+    background: var(--bg-hover);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.btn:focus {
+    outline: 3px solid rgba(123, 227, 199, 0.28);
+    outline-offset: 4px;
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.95;
+}
+
+/* ----------------------------- */
+/* RESPONSIVIDADE                */
+/* ----------------------------- */
+@media (max-width: 420px) {
+    .container {
+        width: 90%;
+    }
+
+    .btn {
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+}
