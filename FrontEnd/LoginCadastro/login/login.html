@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="stylelogin.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Login</h1>
+
+        <form>
+
+            <label id="text" for="email">Email:</label><br>
+            <input type="text" class="input-estiloso" id="email" name="email"><br>
+
+            <label id="text" for="password">Senha:</label><br>
+            <input type="password" class="input-estiloso" id="password" name="password"><br>
+            <!-- MENSAGEM DE ERRO -->
+            <p id="msg"></p>
+            <!-- BOTÃO DENTRO DO FORM -->
+            <button class="btn" type="submit" aria-label="confirmar">
+                Confirmar
+            </button>
+            <br><br>
+            
+            <p>Não tem Cadastro? <a href="/FrontEnd/LoginCadastro/cadastro/cadastro.html">Faça seu cadastro</a></p>
+        </form>
+    </div>
+
+    <!-- AGORA O JS CARREGA DEPOIS DO HTML -->
+    <script src="login.js"></script>
+
+</body>
+</html>

@@ -150,3 +150,8 @@ body {
         padding: 10px 14px;
     }
 }
+
+#text {
+    font-weight: bold;
+    font-size: larger;
+}
