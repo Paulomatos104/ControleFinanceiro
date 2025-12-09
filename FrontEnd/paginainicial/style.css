@@ -3,13 +3,14 @@ body {
     background: #f2f2f2;
 }
 
-.container {
-    width: 400px;
-    margin: 40px auto;
+.saldo {
+    width: 500px;
+    margin: 40px 10px auto auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-self: center;
 }
 
 h1, h2, h3 {
@@ -17,11 +18,12 @@ h1, h2, h3 {
 }
 
 form input, form select, form button {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-top: 8px;
     border-radius: 5px;
     border: 1px solid #aaa;
+    align-self: center;
 }
 
 form button {
@@ -29,6 +31,7 @@ form button {
     color: white;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 
 ul {
@@ -57,7 +60,7 @@ li {
     cursor: pointer;
 }
 
-/* MODAL */
+/* MODAL MUDAR SALÁRIO*/
 .modal {
     display: none;
     position: fixed;
@@ -71,7 +74,7 @@ li {
 }
 
 .modal-content {
-    background: white;
+    background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 10px;
     width: 300px;
@@ -85,8 +88,39 @@ li {
 }
 
 .modal-buttons button {
-    padding: 8px 15px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+header {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #003068;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#imgperfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.editar-salario-box {
+    display: none;
+    margin-top: 10px;
+}
+
+.editar-salario-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+

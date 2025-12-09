@@ -1,4 +1,3 @@
-// Carregar dados ou criar padrão
 let dadosExtrato = JSON.parse(localStorage.getItem("financeiro")) || {
     salario: 0,
     saldo: 0,
@@ -7,21 +6,24 @@ let dadosExtrato = JSON.parse(localStorage.getItem("financeiro")) || {
 
 // ELEMENTOS
 const saldoEl = document.getElementById("saldo");
+const salarioEl = document.getElementById("salario");
 const listaTransacoes = document.getElementById("listaTransacoes");
 const form = document.getElementById("formTransacao");
 
-const modal = document.getElementById("salarioModal");
+const editarBox = document.getElementById("editarSalarioBox");
 const btnEditarSalario = document.getElementById("btn-editar-salario");
 const novoSalarioInput = document.getElementById("novoSalario");
 const salvarSalarioBtn = document.getElementById("salvarSalario");
-const cancelarSalarioBtn = document.getElementById("cancelarSalario");
 
-// Atualizar saldo na tela
-function exibirSaldo() {
+// Atualizar valores
+function atualizarSaldo() {
+    const totalDespesas = dadosExtrato.transacoes.reduce((acc, t) => acc + t.valor, 0);
+    dadosExtrato.saldo = dadosExtrato.salario - totalDespesas;
+
+    salarioEl.textContent = `Salário Mensal: R$ ${dadosExtrato.salario.toFixed(2)}`;
     saldoEl.textContent = `Saldo: R$ ${dadosExtrato.saldo.toFixed(2)}`;
 }
 
-// Atualizar lista de transações
 function atualizarExtrato() {
     listaTransacoes.innerHTML = "";
 
@@ -32,10 +34,52 @@ function atualizarExtrato() {
                 <strong>${t.descricao}</strong><br>
                 <small>${t.formaPagamento.toUpperCase()}</small>
             </div>
-            <span style="color:red;">- R$ ${t.valor.toFixed(2)}</span>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+                <span style="color:red;">- R$ ${t.valor.toFixed(2)}</span>
+                <button class="btn-editar" data-index="${index}">✏️</button>
+                <button class="btn-excluir" data-index="${index}">🗑️</button>
+            </div>
         `;
+
         listaTransacoes.appendChild(li);
     });
+
+    // Eventos de editar
+    document.querySelectorAll(".btn-editar").forEach(btn => {
+        btn.addEventListener("click", () => editarTransacao(btn.dataset.index));
+    });
+
+    // Eventos de excluir
+    document.querySelectorAll(".btn-excluir").forEach(btn => {
+        btn.addEventListener("click", () => excluirTransacao(btn.dataset.index));
+    });
+}
+
+function excluirTransacao(index) {
+    dadosExtrato.transacoes.splice(index, 1);
+    salvarLocal();
+    atualizarExtrato();
+    atualizarSaldo();
+}
+
+function editarTransacao(index) {
+    const novaDesc = prompt("Nova descrição:", dadosExtrato.transacoes[index].descricao);
+    const novoValor = parseFloat(prompt("Novo valor:", dadosExtrato.transacoes[index].valor));
+
+    if (novaDesc && !isNaN(novoValor)) {
+        dadosExtrato.transacoes[index].descricao = novaDesc;
+        dadosExtrato.transacoes[index].valor = novoValor;
+
+        salvarLocal();
+        atualizarExtrato();
+        atualizarSaldo();
+    }
+}
+
+// Salvar no localStorage
+function salvarLocal() {
+    localStorage.setItem("financeiro", JSON.stringify(dadosExtrato));
 }
 
 // Adicionar despesa
@@ -46,65 +90,37 @@ form.addEventListener("submit", (e) => {
     const valor = parseFloat(document.getElementById("valor").value);
     const formaPagamento = document.getElementById("formaPagamento").value;
 
-    if (isNaN(valor) || valor <= 0) {
-        alert("Digite um valor válido!");
-        return;
-    }
+    if (isNaN(valor) || valor <= 0) return alert("Digite um valor válido!");
 
-    const novaTransacao = {
-        descricao,
-        valor,
-        formaPagamento
-    };
+    dadosExtrato.transacoes.push({ descricao, valor, formaPagamento });
 
-    dadosExtrato.transacoes.push(novaTransacao);
-
-    // Recalcular saldo
-    const totalDespesas = dadosExtrato.transacoes.reduce((acc, t) => acc + t.valor, 0);
-    dadosExtrato.saldo = dadosExtrato.salario - totalDespesas;
-
-    // Salvar
-    localStorage.setItem("financeiro", JSON.stringify(dadosExtrato));
-
+    salvarLocal();
     atualizarExtrato();
-    exibirSaldo();
+    atualizarSaldo();
 
     form.reset();
 });
 
-// BOTÃO EDITAR SALÁRIO → abre modal
+// Abrir caixa de edição de salário
 btnEditarSalario.addEventListener("click", () => {
-    modal.style.display = "flex";
+    editarBox.style.display = editarBox.style.display === "block" ? "none" : "block";
 });
 
-// CANCELAR → fecha modal
-cancelarSalarioBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-// SALVAR NOVO SALÁRIO
+// Salvar novo salário
 salvarSalarioBtn.addEventListener("click", () => {
     const novoSalario = parseFloat(novoSalarioInput.value);
 
-    if (isNaN(novoSalario) || novoSalario <= 0) {
-        alert("Digite um salário válido!");
-        return;
-    }
-
+    if (isNaN(novoSalario) || novoSalario <= 0) return alert("Salário inválido!");
+    
     dadosExtrato.salario = novoSalario;
 
-    // Recalcular saldo baseado nas despesas
-    const totalDespesas = dadosExtrato.transacoes.reduce((acc, t) => acc + t.valor, 0);
-    dadosExtrato.saldo = dadosExtrato.salario - totalDespesas;
+    salvarLocal();
+    atualizarSaldo();
 
-    // Salvar
-    localStorage.setItem("financeiro", JSON.stringify(dadosExtrato));
-
-    exibirSaldo();
-    modal.style.display = "none";
     novoSalarioInput.value = "";
+    editarBox.style.display = "none";
 });
 
-// Iniciar interface
+// Inicializar
 atualizarExtrato();
-exibirSaldo();
+atualizarSaldo();

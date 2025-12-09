@@ -7,13 +7,25 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <header>
+        <h1>Olá, seja bem vindo</h1>
+        <div>
+            <img id="imgperfil" src="/FrontEnd/img/img perfil.png" alt="imagem perfil"> 
+        </div>
+    </header>
 
-    <div class="container">
-        <h1>Controle Financeiro</h1>
-
+    <div class="saldo">
         <div class="saldo-info">
-            <h2 id="saldo">Saldo: R$ 0,00</h2>
+            <h2 id="salario">Salário Mensal: R$ 0,00</h2>
+
+            <div id="editarSalarioBox" class="editar-salario-box">
+                <input type="number" id="novoSalario" placeholder="Digite o novo salário" />
+                <button id="salvarSalario" class="btn-salario">Salvar</button>
+            </div>
+
             <button id="btn-editar-salario" class="btn-salario">Editar Salário</button>
+
+            <h2 id="saldo">Saldo: R$ 0,00</h2>
         </div>
 
         <h3>Adicionar Despesa</h3>
@@ -32,18 +44,6 @@
 
         <h3>Extrato</h3>
         <ul id="listaTransacoes"></ul>
-    </div>
-
-    <!-- POP-UP EDITAR SALÁRIO -->
-    <div id="salarioModal" class="modal">
-        <div class="modal-content">
-            <h3>Editar Salário</h3>
-            <input type="number" id="novoSalario" placeholder="Digite o novo salário" />
-            <div class="modal-buttons">
-                <button id="salvarSalario">Salvar</button>
-                <button id="cancelarSalario">Cancelar</button>
-            </div>
-        </div>
     </div>
 
     <script src="script.js"></script>
